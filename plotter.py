@@ -48,10 +48,11 @@ from RK4_dimensionless import runge_kutta4_3d_orbital_dimensionless
 
 
 def plot_earth_orbit_3d():
-    vel_i = [0, 5.5e3, 5.5e3]
-    time_params = [0.0, 6500.0, 110]
+    pos_i = [1.496e11, 0, 0]
+    vel_i = [0, 2.98e4, 0]
+    time_params = (0.0, 3.1e7, 10000)
 
-    time, pos, vel = runge_kutta4_3d_orbital(vel_i, time_params=time_params)
+    time, pos, vel = runge_kutta4_3d_orbital(vel_i=vel_i, pos_i=pos_i, time_params=time_params, body_mass=1.989e30)
 
     x_plot = np.transpose(pos)[0]
     y_plot = np.transpose(pos)[1]
@@ -77,13 +78,14 @@ def plot_earth_orbit_3d():
             file.write(f'{time[i]}\t{x_plot[i] / 1000}\t{y_plot[i] / 1000}\t{z_plot[i] / 1000}\t{vx[i]}\t{vy[i]}\t{vz[i]}\n')
 
 
-STEPS = 168
+STEPS = 10000
 def plot_earth_orbit_3d_dimensionless():
 
-    vel_i = [0, 5.5e3, 5.5e3]
-    time_params = (0.0, 10019.0, STEPS)
+    pos_i = [1.496e11, 0, 0]
+    vel_i = [0, 2.98e4, 0]
+    time_params = (0.0, 1.261e8, STEPS)
 
-    time, pos, vel = runge_kutta4_3d_orbital_dimensionless(vel_i, time_params=time_params)
+    time, pos, vel = runge_kutta4_3d_orbital_dimensionless(vel_i, pos_i=pos_i, time_params=time_params)
 
     x_plot = np.transpose(pos)[0]
     y_plot = np.transpose(pos)[1]
